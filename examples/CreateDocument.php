@@ -40,7 +40,11 @@ echo "Create CMIS Document with file README.md\n\n";
 
 $properties = array(
     \Dkd\PhpCmis\PropertyIds::OBJECT_TYPE_ID => 'cmis:document',
-    \Dkd\PhpCmis\PropertyIds::NAME => 'Demo Object'
+    \Dkd\PhpCmis\PropertyIds::NAME => 'Demo Object',
+    \Dkd\PhpCmis\PropertyIds::SECONDARY_OBJECT_TYPE_IDS => [
+        'P:dkd:typo3:aspect:forgettable'
+    ],
+    'dkd:typo3:forgettable:preservation_value' => 2147483647
 );
 
 try {
@@ -52,7 +56,7 @@ try {
 
     echo "Document has been created. Document Id: " . $document->getId() . "\n";
     echo "Please delete that document now by hand!\n";
-} catch (\Dkd\PhpCmis\Exception\CmisContentAlreadyExistsException $e) {
+} catch (\Exception $e){
     echo "********* ERROR **********\n";
     echo $e->getMessage() . "\n";
     echo "**************************\n";
